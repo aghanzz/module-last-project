@@ -1,0 +1,1456 @@
+/* =============================================
+   TREACT — style.css
+
+   HOW TO USE:
+   Add this line inside your <head> tag:
+   <link rel="stylesheet" href="style.css">
+
+   Also add these two lines for fonts & icons:
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+   For the mobile menu to work, add this before </body>:
+   <script>
+     function openMenu()  { document.querySelector('.menu').classList.add('open'); }
+     function closeMenu() { document.querySelector('.menu').classList.remove('open'); }
+   </script>
+
+   TABLE OF CONTENTS:
+   1.  Variables & Reset
+   2.  Base Styles
+   3.  Layout (container, row)
+   4.  Reusable Components (btn, section tags)
+   5.  Navbar
+   6.  Mobile Menu
+   7.  Hero / Header
+   8.  Features
+   9.  Quality
+   10. Steps
+   11. Values
+   12. Pricing
+   13. Testimonials
+   14. Start / CTA
+   15. Footer
+   16. Media Queries
+============================================= */
+
+
+/* =============================================
+   1. VARIABLES & CSS RESET
+============================================= */
+
+/* CSS Variables — change these to restyle everything */
+:root {
+  --purple:      #6415FF;   /* Main brand color */
+  --purple-dark: #5011CC;   /* Hover state for purple */
+  --dark:        #243E63;   /* Dark navy for headings */
+  --gray:        #7C8BA1;   /* Gray for body text */
+  --light-bg:    #F7F7F7;   /* Light gray for alternate sections */
+  --white:       #ffffff;
+  --border:      #E4E4E4;   /* Light border color */
+}
+
+/* Remove default browser spacing on everything */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Prevent horizontal scrollbar from blobs/overflows */
+html {
+  overflow-x: hidden;
+}
+
+
+/* =============================================
+   2. BASE STYLES
+============================================= */
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--dark);
+  background: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Images never overflow their parent */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Remove underline from all links */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* All buttons inherit the page font */
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* .purple makes any inline text purple */
+.purple {
+  color: var(--purple);
+}
+
+
+/* =============================================
+   3. LAYOUT UTILITIES
+============================================= */
+
+/*
+  .container — limits width and centers content
+  Used in every section to keep things aligned
+*/
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/*
+  .row — side-by-side layout (left | right)
+  Used in hero, quality, steps, values, testimonials
+*/
+.row {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  padding: 80px 0;
+}
+
+/*
+  .row__narrow — centered column layout
+  Used in features section (everything stacked in center)
+*/
+.row__narrow {
+  display: flex;
+  flex-direction: column;  /* Stack items vertically */
+  align-items: center;     /* Center everything horizontally */
+  text-align: center;
+  padding: 80px 0;
+}
+
+
+/* =============================================
+   4. REUSABLE COMPONENTS
+============================================= */
+
+/*
+  .btn — the purple pill button used throughout the site
+  Example: <button class="btn">Learn More</button>
+*/
+.btn {
+  display: inline-block;
+  background: var(--purple);
+  color: white;
+  border: none;
+  border-radius: 50px;        /* Makes it a pill/capsule shape */
+  padding: 14px 40px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.btn:hover {
+  background: var(--purple-dark);
+  transform: translateY(-2px);  /* Slight lift effect on hover */
+}
+
+/*
+  .section__tag — small uppercase label above headings
+  Example: "FEATURES", "QUALITY WORK", etc.
+*/
+.section__tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;       /* Wide spacing between letters */
+  color: var(--purple);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/*
+  .section__title — the big heading in each section
+  Example: "We Have Amazing Service."
+*/
+.section__title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--dark);
+  line-height: 1.25;
+  margin-bottom: 16px;
+}
+
+/*
+  .section__para — the paragraph below the section title
+*/
+.section__para {
+  color: var(--gray);
+  line-height: 1.8;
+  font-size: 0.95rem;
+  max-width: 580px;
+}
+
+
+/* =============================================
+   5. NAVBAR
+============================================= */
+
+nav {
+  position: sticky;           /* Sticks to top when you scroll */
+  top: 0;
+  background: white;
+  z-index: 100;               /* Stays above all other content */
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+/*
+  .nav__row uses both .row and .nav__row classes
+  We override .row's padding and gap here
+*/
+.nav__row {
+  justify-content: space-between;
+  padding: 16px 0;            /* Shorter than normal .row padding */
+  gap: 0;                     /* No gap — we space links manually */
+}
+
+/* Logo: image + "Treact" text side by side */
+.nav__logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav__logo--img {
+  height: 32px;
+}
+
+.nav__logo--title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--purple);
+}
+
+/* Navigation links row: About, Blog, Pricing, etc. */
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav__link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--dark);
+  transition: color 0.2s;
+}
+
+.nav__link:hover {
+  color: var(--purple);
+}
+
+/* Login button — outlined style */
+.nav__link.login {
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 18px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.nav__link.login:hover {
+  border-color: var(--purple);
+  color: var(--purple);
+}
+
+/* Sign Up button — filled purple */
+.nav__link--primary {
+  background: var(--purple);
+  color: white;
+  border-radius: 6px;
+  padding: 8px 20px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.nav__link--primary:hover {
+  background: var(--purple-dark);
+  color: white;
+}
+
+/* Hamburger menu button — only shows on mobile */
+.btn__menu {
+  display: none;              /* Hidden on desktop */
+  background: none;
+  border: none;
+  color: var(--dark);
+  padding: 4px;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* =============================================
+   6. MOBILE MENU (full screen overlay)
+============================================= */
+
+.menu {
+  position: fixed;            /* Covers the whole screen */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 200;               /* On top of everything */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+
+  /* Hidden by default — JavaScript adds .open class */
+  opacity: 0;
+  pointer-events: none;       /* Can't click when hidden */
+  transform: translateY(-16px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+/* When JavaScript adds .open, the menu becomes visible */
+.menu.open {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+/* X close button in the top right of the menu */
+.btn__menu--close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: var(--dark);
+  cursor: pointer;
+}
+
+/* Mobile menu links — bigger than desktop links */
+.menu__links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.menu__link {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--dark);
+  transition: color 0.2s;
+}
+
+.menu__link:hover {
+  color: var(--purple);
+}
+
+/* Sign Up button in mobile menu */
+.menu__link--primary {
+  background: var(--purple);
+  color: white;
+  border-radius: 50px;
+  padding: 12px 48px;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.menu__link--primary:hover {
+  background: var(--purple-dark);
+  color: white;
+}
+
+
+/* =============================================
+   7. HERO / HEADER SECTION
+============================================= */
+
+/* The whole landing section (nav + header) has white bg */
+#landing {
+  background: var(--white);
+}
+
+/*
+  .header__description — the LEFT side of the hero
+  Contains: h1, paragraph, email input, customer logos
+*/
+.header__description {
+  flex: 1;                    /* Takes up half the space */
+  max-width: 540px;
+}
+
+/* The big hero headline */
+.header__description h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1.2;
+  color: var(--dark);
+  margin-bottom: 20px;
+}
+
+.header__description--para {
+  color: var(--gray);
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+/*
+  .header__email — the email input + button row
+  The input and button are joined together (no gap)
+*/
+.header__email {
+  display: flex;
+  max-width: 420px;
+  margin-bottom: 36px;
+}
+
+.header__email--input {
+  flex: 1;
+  padding: 14px 20px;
+  border: 2px solid var(--border);
+  border-right: none;           /* Remove right border so it joins the button */
+  border-radius: 50px 0 0 50px; /* Round only the left side */
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: var(--dark);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.header__email--input:focus {
+  border-color: var(--purple);
+}
+
+.header__email--input::placeholder {
+  color: var(--gray);
+}
+
+.header__email--btn {
+  background: var(--purple);
+  color: white;
+  border: none;
+  border-radius: 0 50px 50px 0; /* Round only the right side */
+  padding: 14px 24px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.header__email--btn:hover {
+  background: var(--purple-dark);
+}
+
+/* "OUR TRUSTED CUSTOMERS" text above the logo strip */
+.header__customers--title {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--gray);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+/* The row of customer/company logos */
+.header__customers {
+  max-width: 380px;
+  width: 100%;
+  opacity: 0.65;
+}
+
+/*
+  .header__img--wrapper — the RIGHT side (illustration)
+*/
+.header__img--wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.header__img {
+  max-width: 100%;
+  width: 520px;
+}
+
+
+/* =============================================
+   8. FEATURES SECTION
+============================================= */
+
+#features {
+  background: var(--light-bg); /* Light gray background */
+}
+
+/* Add spacing below the paragraph before the grid */
+#features .section__para {
+  margin-bottom: 52px;
+}
+
+/*
+  .features — 2-column grid of feature cards
+  Each card has an icon on the left and text on the right
+*/
+.features {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 equal columns */
+  gap: 40px 64px;
+  width: 100%;
+  text-align: left;               /* Override .row__narrow centering */
+}
+
+/*
+  .feature__row — icon (left) + text (right) side by side
+*/
+.feature__row {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+/* Rounded square container for the icon image */
+.feature__img--wrapper {
+  flex-shrink: 0;                 /* Don't let it shrink */
+  width: 60px;
+  height: 60px;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(100, 21, 255, 0.12);
+}
+
+.feature__img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.feature__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+
+.feature__para {
+  font-size: 0.88rem;
+  color: var(--gray);
+  line-height: 1.7;
+}
+
+
+/* =============================================
+   9. QUALITY SECTION
+============================================= */
+
+#quality {
+  background: var(--white);
+}
+
+/* Left: text */
+.quality__description {
+  flex: 1;
+  max-width: 480px;
+}
+
+.quality__description .section__para {
+  margin-bottom: 32px;
+}
+
+/* Right: image with dot grid decoration behind it */
+.quality__img--wrapper {
+  flex: 1;
+  position: relative; /* Needed so the SVG can be positioned inside */
+  display: flex;
+  justify-content: center;
+}
+
+/* The main screenshot/image — sits on top of the dot grid */
+.quality__img {
+  position: relative;
+  z-index: 2;          /* Above the dot grid */
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+}
+
+/* The dot grid SVG — positioned behind and offset from the image */
+.quality__grid {
+  position: absolute;
+  bottom: -50px;
+  right: -50px;
+  width: 260px;
+  height: 260px;
+  z-index: 1;          /* Behind the image */
+  fill: rgba(100, 21, 255, 0.12);
+}
+
+
+/* =============================================
+   10. STEPS SECTION
+============================================= */
+
+#steps {
+  background: var(--light-bg);
+}
+
+/* Left: screenshot image with dot grid behind */
+.steps__img--wrapper {
+  flex: 1;
+  position: relative;
+}
+
+.steps__img {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+}
+
+/* Dot grid SVG — top-left corner decoration */
+.steps__grid {
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 260px;
+  height: 260px;
+  z-index: 1;
+}
+
+/* Right: steps text */
+.steps__description {
+  flex: 1;
+  max-width: 480px;
+}
+
+.steps__description .section__title {
+  margin-bottom: 40px;
+}
+
+/* The list of 3 steps */
+.steps__list {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+/* Each step: big number (left) + title/description (right) */
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+/* The big faded number: 01, 02, 03 */
+.step__number {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--purple);
+  opacity: 0.15;       /* Very faint — decorative */
+  line-height: 1;
+  min-width: 60px;
+}
+
+.step__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+
+.step__para {
+  font-size: 0.88rem;
+  color: var(--gray);
+  line-height: 1.7;
+}
+
+
+/* =============================================
+   11. VALUES SECTION
+============================================= */
+
+#values {
+  background: var(--white);
+}
+
+/* Left: text, values list, button */
+.values__description {
+  flex: 1;
+  max-width: 520px;
+}
+
+.values__description .section__para {
+  margin-bottom: 28px;
+}
+
+/* Container for both value items */
+.values__list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 36px;
+}
+
+/* Each value card */
+.value {
+  background: var(--light-bg);
+  border-radius: 12px;
+  padding: 20px 24px;
+}
+
+/* Top row: icon + value name */
+.value__title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+/* Circular background for the SVG icon */
+.value__img--wrapper {
+  width: 44px;
+  height: 44px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.value__img {
+  width: 22px;
+  height: 22px;
+}
+
+.value__name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.value__para {
+  font-size: 0.88rem;
+  color: var(--gray);
+  line-height: 1.7;
+}
+
+/* Right: the illustration image */
+.values__img {
+  flex: 1;
+  max-width: 460px;
+}
+
+
+/* =============================================
+   12. PRICING SECTION
+============================================= */
+
+#pricing {
+  background: var(--light-bg);
+}
+
+/*
+  The pricing .row stacks everything in a column
+  (section tag, title, paragraph, then the 3 plans)
+*/
+#pricing .row {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+#pricing .section__para {
+  margin-bottom: 48px;
+}
+
+/*
+  .plans — the 3 plan cards side by side
+  position: relative lets us position the blob SVG inside
+*/
+.plans {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  width: 100%;
+  position: relative;
+}
+
+/* Each plan card */
+.plan {
+  flex: 1;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;             /* So the stripe rounds at the top */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  z-index: 2;                   /* Above the blob decoration */
+}
+
+.plan:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(100, 21, 255, 0.14);
+}
+
+/*
+  .plan__stripe — the colored bar at the very top of each card
+  We use nth-child to give each plan a different color
+*/
+.plan__stripe {
+  height: 8px;
+  width: 100%;
+}
+
+.plan:nth-child(1) .plan__stripe { background: #FFB4BC; } /* Personal — pink */
+.plan:nth-child(2) .plan__stripe { background: var(--purple); } /* Business — purple */
+.plan:nth-child(3) .plan__stripe { background: #59B3D2; } /* Enterprise — blue */
+
+/* Top area: plan name, price, billing period */
+.plan__top {
+  padding: 28px 28px 20px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.plan__name {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 14px;
+}
+
+.plan__price {
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--dark);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.plan__duration {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+
+/* Middle area: target audience + feature list */
+.plan__middle {
+  padding: 24px 28px;
+  border-bottom: 1px solid var(--border);
+}
+
+.plan__target {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+/* Each feature line in the plan */
+.plan__feature {
+  font-size: 0.88rem;
+  color: var(--gray);
+  padding: 9px 0;
+  border-top: 1px solid var(--border);
+}
+
+/* Bottom area: Buy Now button */
+.plan__bottom {
+  padding: 24px 28px;
+  text-align: center;
+}
+
+.plan__button {
+  width: 100%;
+  padding: 13px;
+  background: var(--purple);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.plan__button:hover {
+  background: var(--purple-dark);
+  transform: translateY(-1px);
+}
+
+/* Pink blob decoration — sits behind the plan cards */
+.plans__blob {
+  position: absolute;
+  right: -120px;
+  top: -80px;
+  width: 440px;
+  opacity: 0.5;
+  z-index: 1;                   /* Behind the cards (z-index: 2) */
+  pointer-events: none;         /* Clicks pass through it */
+}
+
+
+/* =============================================
+   13. TESTIMONIALS SECTION
+============================================= */
+
+#testimonials {
+  background: var(--white);
+}
+
+/* Left: the love illustration */
+.testimonials__img {
+  flex: 1;
+  max-width: 400px;
+}
+
+/* Right: testimonial content */
+.testimonials__description {
+  flex: 1;
+  max-width: 540px;
+}
+
+.testimonials__description .section__para {
+  margin-bottom: 28px;
+}
+
+/* The quote card */
+.testimonial {
+  background: var(--light-bg);
+  border-radius: 12px;
+  padding: 28px;
+}
+
+/* Star rating row */
+.testimonial__rating {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 14px;
+}
+
+/* Gold star icons (FontAwesome) */
+.testimonial__rating .fa-star {
+  color: #F6BE00;
+  font-size: 0.95rem;
+}
+
+.testimonial__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 12px;
+}
+
+.testimonial__para {
+  font-size: 0.88rem;
+  color: var(--gray);
+  line-height: 1.85;
+  margin-bottom: 20px;
+}
+
+/* Row at the bottom: profile + nav buttons */
+.testimonial__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Avatar + name/role */
+.testimonial__profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Profile photo — circular */
+.testimonial__img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.testimonial__name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--dark);
+}
+
+.testimonial__role {
+  font-size: 0.8rem;
+  color: var(--gray);
+}
+
+/* Prev/Next arrow buttons — connected with a shared border */
+.testimonial__buttons {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--purple);
+  border-radius: 50px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.testimonial__button {
+  background: transparent;
+  border: none;
+  padding: 8px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.testimonial__button:hover {
+  background: rgba(100, 21, 255, 0.08);
+}
+
+.testimonial__button svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Vertical line divider between the two buttons */
+.divider {
+  width: 1px;
+  height: 38px;
+  background: var(--purple);
+  flex-shrink: 0;
+}
+
+
+/* =============================================
+   14. START / CTA SECTION
+============================================= */
+
+#start {
+  background: var(--purple);
+  position: relative;
+  overflow: hidden;             /* Clip the blobs at edges */
+}
+
+/* Two decorative purple blob shapes in the background */
+.start__blob--1 {
+  position: absolute;
+  top: -200px;
+  right: -80px;
+  width: 500px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.start__blob--2 {
+  position: absolute;
+  bottom: -220px;
+  left: -80px;
+  width: 500px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* Sits above the blobs */
+.start__container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Title on left, buttons on right */
+.start__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 80px 0;
+}
+
+.start__title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: white;
+  max-width: 400px;
+  line-height: 1.3;
+}
+
+.start__buttons {
+  display: flex;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+/* First CTA button — white with purple text */
+.start__button.btn {
+  background: white;
+  color: var(--purple);
+}
+
+.start__button.btn:hover {
+  background: var(--light-bg);
+  transform: translateY(-2px);
+}
+
+/* Second CTA button — transparent/outlined */
+.start__button.btn:last-child {
+  background: transparent;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.start__button.btn:last-child:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+
+/* =============================================
+   15. FOOTER
+============================================= */
+
+footer {
+  background: #1A1A2E;          /* Very dark navy */
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 0;
+}
+
+/* Two purple blobs as background decoration */
+.footer__blob--1 {
+  position: absolute;
+  top: -200px;
+  right: -80px;
+  width: 500px;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.footer__blob--2 {
+  position: absolute;
+  bottom: -200px;
+  left: -80px;
+  width: 500px;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+/*
+  .footer__row uses both .row and .footer__row
+  We override .row to make it a column
+*/
+.footer__row {
+  flex-direction: column;
+  gap: 0;
+  padding: 64px 0 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* 5-column grid for footer links */
+.footer__columns {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 32px;
+  width: 100%;
+  margin-bottom: 48px;
+}
+
+.footer__column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Column header e.g. "MAIN", "PRODUCT" */
+.footer__column--title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6B8CAE;
+  margin-bottom: 4px;
+}
+
+/* Footer link items */
+.footer__column--link {
+  font-size: 0.88rem;
+  color: #A0B3C7;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.footer__column--link:hover {
+  color: white;
+}
+
+/* Horizontal line between columns and bottom bar */
+.footer__divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin-bottom: 28px;
+}
+
+/* Bottom bar: logo | copyright | social icons */
+.footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 36px;
+}
+
+/* Footer logo: image + "Treact Inc." text */
+.footer__logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer__logo--img {
+  height: 28px;
+}
+
+.footer__logo--text {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: white;
+}
+
+.footer__copyright {
+  font-size: 0.8rem;
+  color: #6B8CAE;
+}
+
+/* Social icon links row */
+.footer__socials {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Each circular social icon */
+.footer__social--link {
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #A0B3C7;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.footer__social--link:hover {
+  background: var(--purple);
+  color: white;
+}
+
+.footer__social--link svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+
+/* =============================================
+   16. MEDIA QUERIES (Responsive Design)
+
+   These rules ONLY apply when the screen is
+   smaller than the specified width.
+   They override the styles above.
+============================================= */
+
+/* --- Tablet (max 1024px) --- */
+@media (max-width: 1024px) {
+  .section__title {
+    font-size: 1.9rem;
+  }
+
+  .header__description h1 {
+    font-size: 2.4rem;
+  }
+
+  /* Switch features to 1 column */
+  .features {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  /* Plans wrap to 2 per row */
+  .plans {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .plan {
+    min-width: 280px;
+    max-width: 340px;
+  }
+
+  /* Footer goes to 3 columns */
+  .footer__columns {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* --- Mobile (max 768px) --- */
+@media (max-width: 768px) {
+  /* Show hamburger menu, hide desktop links */
+  .btn__menu {
+    display: flex;
+  }
+
+  .nav__links {
+    display: none;
+  }
+
+  /* Stack ALL .row sections vertically */
+  .row {
+    flex-direction: column;
+    padding: 60px 0;
+    gap: 40px;
+  }
+
+  .row__narrow {
+    padding: 60px 0;
+  }
+
+  /* Hero text — center aligned and full width */
+  .header__description {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .header__description h1 {
+    font-size: 2rem;
+  }
+
+  .header__email {
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  /* Hero illustration shows ABOVE the text on mobile */
+  .header__img--wrapper {
+    order: -1;
+  }
+
+  /* Quality and steps images take full width */
+  .quality__img--wrapper,
+  .steps__img--wrapper {
+    width: 100%;
+  }
+
+  /* Values text center aligned on mobile */
+  .values__description {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .value__title {
+    justify-content: center;
+  }
+
+  /* Stack pricing cards vertically */
+  .plans {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .plan {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  /* CTA section — stack title above buttons */
+  .start__row {
+    flex-direction: column;
+    text-align: center;
+    padding: 60px 0;
+  }
+
+  .start__title {
+    max-width: 100%;
+    font-size: 1.75rem;
+  }
+
+  /* Footer columns — 2 per row on mobile */
+  .footer__columns {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Stack footer bottom items */
+  .footer__bottom {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    padding-bottom: 40px;
+  }
+}
+
+/* --- Small phones (max 480px) --- */
+@media (max-width: 480px) {
+  .header__description h1 {
+    font-size: 1.75rem;
+  }
+
+  .section__title {
+    font-size: 1.6rem;
+  }
+
+  .start__title {
+    font-size: 1.5rem;
+  }
+
+  /* Stack email input + button vertically */
+  .header__email {
+    flex-direction: column;
+  }
+
+  .header__email--input {
+    border-right: 2px solid var(--border);
+    border-radius: 50px;        /* Full pill when stacked */
+  }
+
+  .header__email--btn {
+    border-radius: 50px;
+    padding: 13px;
+  }
+
+  /* Footer single column on very small screens */
+  .footer__columns {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
